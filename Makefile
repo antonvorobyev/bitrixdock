@@ -1,4 +1,5 @@
 include .env
+include .env.local
 
 .DEFAULT_GOAL := help
 
@@ -18,7 +19,7 @@ console-mysql-root: ## Log in to the MySQL console from "root"
 	docker-compose exec db mysql -u root --password=$(MYSQL_ROOT_PASSWORD) -A $(MYSQL_DATABASE)
 
 up: ## Up Docker-project
-	docker-compose up -d
+	docker-compose --env-file .env --env-file .env.local up -d
 
 down: ## Down Docker-project
 	docker-compose down --remove-orphans
