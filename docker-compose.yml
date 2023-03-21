@@ -1,6 +1,7 @@
-version: '2'
+version: '3.9'
 
 services:
+
     php:
         build: ./${PHP_VERSION}
         volumes_from:
@@ -11,6 +12,7 @@ services:
         networks:
             - bitrix
         restart: unless-stopped
+
     web_server:
         build: ./${WEB_SERVER_TYPE}
         depends_on:
@@ -25,6 +27,7 @@ services:
         networks:
             - bitrix
         restart: unless-stopped
+
     db:
         build: ./${DB_SERVER_TYPE}
         platform: linux/amd64
@@ -43,6 +46,7 @@ services:
         networks:
             - bitrix
         restart: unless-stopped
+
     memcached:
         image: memcached:1.6.12-alpine
         volumes_from:
@@ -52,6 +56,7 @@ services:
         networks:
             - bitrix
         restart: unless-stopped
+
     adminer:
         image: dockette/adminer:full
         links:
@@ -62,6 +67,7 @@ services:
             UPLOAD: 1024M # upload_max_filesize, post_max_size
         networks:
             - bitrix
+
     source:
         image: alpine:latest
         volumes:
